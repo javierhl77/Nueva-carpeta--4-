@@ -1,11 +1,9 @@
 
-
-//modificar para funcionar con dao
-
+// 
 const CartModel = require("../models/cart.model.js");
 
 
-class CartRepository {
+class mongoCartDao {
 
     async crearCarrito() {
 
@@ -118,4 +116,4 @@ class CartRepository {
     }
 }
 
-module.exports = CartRepository;
+module.exports = mongoCartDao;

@@ -49,8 +49,8 @@ router.get("/carts/:cid", async (req, res) => {
    const cartId = req.params.cid;
    
    try {
-      const carrito = await cartModel.findById(cartId);
-      console.log(carrito);
+      const carrito = await cartModel.findById(cartId)//.populate("products");
+      console.log(JSON.stringify(carrito, null, 2));
       if (!carrito) {
          console.log("No existe ese carrito con el id");
          return res.status(404).json({ error: "Carrito no encontrado" });
