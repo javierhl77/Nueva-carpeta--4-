@@ -3,7 +3,7 @@
 //modificar para funcionar con dao
 
 //const CartModel = require("../models/cart.model.js");
-const Cartfactory = require("../dao/cart.factory.js");
+const Cartfactory = require("../dao/cartFactory.js");
 const cartService = new Cartfactory();
 
 /* class CartRepository {

@@ -4,9 +4,9 @@ const config = require("../config/config.js");
 
 let DAO;
 
-switch(config.persistence) {
+switch(config.persistencia) {
     case "mongo":
-        DAO = require("../dao/mongo.cart.dao.js");
+        DAO = require("./mongo.cart.dao.js");
         break;
     //case "memory":
       //  DAO = require("../dao/memory.dao.js");
@@ -14,7 +14,7 @@ switch(config.persistence) {
     //case "file":
       //  DAO = require("../dao/filesystem.dao.js")
         //break;
-    //default: 
+    default: 
       throw new Error("Persistencia no válida, escribiii bieeeeennnn!!!");
 }
 
