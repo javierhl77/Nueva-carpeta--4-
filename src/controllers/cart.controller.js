@@ -4,7 +4,7 @@ const cartRepository = new CartRepository();
 class CartController {
   async nuevoCarrito(req, res) {
     try {
-        const nuevoCarrito = await cartRepository.crearCarrito();
+        const nuevoCarrito = await cartRepository.CreateCart();
         res.json(nuevoCarrito);
     } catch (error) {
         res.status(500).send("Error");
@@ -14,7 +14,7 @@ class CartController {
   async obtenerProductoDeCarrito(req, res) {
     const carritoId = req.params.cid;
     try {
-        const productos = await cartRepository.obtenerProductosDelCarrito(carritoId);
+        const productos = await cartRepository.GetProductsCart(carritoId);
         console.log(productos);
         res.json(productos);
 
@@ -30,7 +30,7 @@ class CartController {
     const quantity = req.body.quantity || 1;
 
     try {
-        await cartRepository.agregarProductoAlCarrito(cartId, productoId, quantity);
+        await cartRepository.AddProductsCart(cartId, productoId, quantity);
         res.send("producto Agregado");
         
     } catch (error) {
@@ -43,7 +43,7 @@ class CartController {
     const productoId = req.params.pid;
 
     try {
-      const carrito = await cartRepository.eliminarProducto(cartId, productoId)
+      const carrito = await cartRepository.DeleteProductCart(cartId, productoId)
       res.json({
         status: "succes",
         message: "producto eliminado correctamente",
@@ -59,7 +59,7 @@ class CartController {
     const cartId = req.params.cid;
     const updateProducts = req.body;
     try {
-      const carrito = await cartRepository.actualizarProductoEnCarrito(cartId, updateProducts);
+      const carrito = await cartRepository.UpdateProductCart(cartId, updateProducts);
       res.json({
         status: "succes",
         message: "producto actualizado correctamnete",
@@ -74,7 +74,7 @@ class CartController {
     const productoId = req.params.pid;
     const newQuantity = req.body.quantity;
     try {
-      const carrito = await cartRepository.actualizarCantidadesEnCarrito(cartId, productoId, newQuantity);
+      const carrito = await cartRepository.UpdateQuantityProductCart(cartId, productoId, newQuantity);
       res.json({
         status: "succes",
         message: "carrito actualizado en sus cantidades",
@@ -88,7 +88,7 @@ class CartController {
   async vaciarCarrito(req,res) {
     const cartId = req.params.cid;
     try {
-      const carrito = await cartRepository.vaciarCarrito(cartId);
+      const carrito = await cartRepository.EmptyCart(cartId);
 
       res.json({
         status: "succes",
