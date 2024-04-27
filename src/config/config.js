@@ -3,7 +3,7 @@
 require("dotenv").config();
 
 const config = {
-    persistencia: process.env.PERSISTENCIA || "mongo"
+    persistence: process.env.PERSISTENCE //|| "mongo"
     //Mongo es la opción por defecto
 };
 

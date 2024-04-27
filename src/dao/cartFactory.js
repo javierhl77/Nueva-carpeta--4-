@@ -4,7 +4,7 @@ const config = require("../config/config.js");
 
 let DAO;
 
-switch(config.persistencia) {
+switch(config.persistence) {
     case "mongo":
         DAO = require("./mongo.cart.dao.js");
         break;
