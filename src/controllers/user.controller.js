@@ -1,9 +1,14 @@
 
 
 const UserModel = require("../models/user.model.js");
+
 const CartModel = require("../models/cart.model.js");
+
+/* const UserRepository = require("../repositories/user.repository.js");
+const userRepository = new UserRepository(); */
+
 const jwt = require("jsonwebtoken");
-const { createHash, isValidPassword } = require("../utils/hashbcryp.js");
+const { createHash, isValidPassword } = require("../utils/hashbcrypt.js");
 const UserDTO = require("../dto/user.dto.js");
 
 class UserController {
@@ -28,11 +33,12 @@ class UserController {
                 age
             });
 
-            await nuevoUsuario.save();
-
+            await nuevoUsuario.save(); 
+         /*    const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
+           
             const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
                 expiresIn: "1h"
-            });
+            }); */
 
             res.cookie("coderCookieToken", token, {
                 maxAge: 3600000,
@@ -49,8 +55,13 @@ class UserController {
     async login(req, res) {
         const { email, password } = req.body;
         try {
-            const usuarioEncontrado = await UserModel.findOne({ email });
+           /*  const usuarioEncontrado = await UserModel.findOne({ email });
 
+            if (!usuarioEncontrado) {
+                return res.status(401).send("Usuario no válido");
+            } */
+
+            const usuarioEncontrado = userRepository.findByEmail({email});
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
             }
