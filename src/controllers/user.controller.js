@@ -15,7 +15,7 @@ class UserController {
     async register(req, res) {
         const { first_name, last_name, email, password, age } = req.body;
         try {
-            const existeUsuario = await UserModel.findOne({ email });
+           /*  const existeUsuario = await UserModel.findOne({ email });
             if (existeUsuario) {
                 return res.status(400).send("El usuario ya existe");
             }
@@ -33,19 +33,19 @@ class UserController {
                 age
             });
 
-            await nuevoUsuario.save(); 
-         /*    const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
-           
-            const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
+            await nuevoUsuario.save();  */
+             const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
+             console.log("usuario creqdo")
+          /*   const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
                 expiresIn: "1h"
-            }); */
+            }); 
 
             res.cookie("coderCookieToken", token, {
                 maxAge: 3600000,
                 httpOnly: true
             });
-
-            res.redirect("/api/users/profile");
+ */
+            //res.redirect("/api/users/profile");
         } catch (error) {
             console.error(error);
             res.status(500).send("Error interno del servidor");

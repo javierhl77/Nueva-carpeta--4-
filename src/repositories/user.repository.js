@@ -16,11 +16,12 @@ class UserRepository {
         }
     }
 
-    async RegisterUser(first_name, last_name, email, password, age) {
+    async RegisterUser({first_name, last_name, email, password, age}) {
         try {
-            nuevoUsuario = await userService.registrarUsuario(first_name, last_name, email, password, age);
+            nuevoUsuario = await userService.registrarUsuario({first_name, last_name, email, password, age});
+            console.log("usuario creado");
             return nuevoUsuario;
-            console.log(nuevoUsuario);
+            
         } catch (error) {
             throw new  error("error")
         }

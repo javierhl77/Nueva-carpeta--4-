@@ -2,10 +2,10 @@
 
 const UserModel = require("../models/user.model.js");
 const CartModel = require("../models/cart.model.js");
-
+const { createHash, isValidPassword } = require("../utils/hashbcrypt.js");
 class mongoUserDao {
 
-  async registrarUsuario(first_name, last_name, email, password, age) {
+  async registrarUsuario({first_name, last_name, email, password, age}) {
     try {
       const existeUsuario = await UserModel.findOne(email);
       if (existeUsuario) {
@@ -14,9 +14,9 @@ class mongoUserDao {
       }
 
       //Creo un nuevo carrito: 
-      const nuevoCarrito = new CartModel();
+      const nuevoCarrito = new CartModel({ products: [] });
       await nuevoCarrito.save();
-       console.log("carrito creado para el usuario");
+       console.log("carrtito creado");
       const nuevoUsuario = new UserModel({
           first_name,
           last_name,
@@ -28,6 +28,7 @@ class mongoUserDao {
 
       await nuevoUsuario.save();
       return nuevoUsuario;
+
         
     } catch (error) {
         throw new  error("error")
