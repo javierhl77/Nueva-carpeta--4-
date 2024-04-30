@@ -21,8 +21,10 @@ class mongoUserDao {
           first_name,
           last_name,
           email,
-          cart: nuevoCarrito._id, 
           password: createHash(password),
+          age,
+          cart: nuevoCarrito._id, 
+          
           age
       });
 

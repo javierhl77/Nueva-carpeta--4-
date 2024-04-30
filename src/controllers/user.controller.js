@@ -4,18 +4,43 @@ const UserModel = require("../models/user.model.js");
 
 const CartModel = require("../models/cart.model.js");
 
-/* const UserRepository = require("../repositories/user.repository.js");
-const userRepository = new UserRepository(); */
+//const UserRepository = require("../repositories/user.repository.js");
+//const userRepository = new UserRepository(); 
 
 const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashbcrypt.js");
 const UserDTO = require("../dto/user.dto.js");
 
 class UserController {
+    
     async register(req, res) {
-        const { first_name, last_name, email, password, age } = req.body;
+
+        const {first_name,last_name,email,password,age} = req.body;
+
         try {
-           /*  const existeUsuario = await UserModel.findOne({ email });
+            const nuevoCarrito = new CartModel();
+            await nuevoCarrito.save();
+
+            const nuevoUsuario = await UserModel.create({
+                first_name,
+                last_name,
+                email,
+                password: createHash(password),
+                age,
+                cart: nuevoCarrito._id, 
+                
+            });
+            //await nuevoUsuario.save();
+            res.json(nuevoUsuario);
+              
+            res.send("usuario registrado correctamente");
+        } catch (error) {
+            
+        }
+        
+        /* const {first_name,last_name,email,password,age } = req.body;
+        try {
+            const existeUsuario = await UserModel.findOne({email:email});
             if (existeUsuario) {
                 return res.status(400).send("El usuario ya existe");
             }
@@ -28,15 +53,19 @@ class UserController {
                 first_name,
                 last_name,
                 email,
-                cart: nuevoCarrito._id, 
                 password: createHash(password),
-                age
+                age,
+                cart: nuevoCarrito._id, 
+                
             });
+            await nuevoUsuario.save();
+            res.json(nuevoUsuario);
+              
+            res.send("usuario registrado correctamente");
 
-            await nuevoUsuario.save();  */
-             const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
+             //const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
              console.log("usuario creqdo")
-          /*   const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
+            const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
                 expiresIn: "1h"
             }); 
 
@@ -44,12 +73,12 @@ class UserController {
                 maxAge: 3600000,
                 httpOnly: true
             });
- */
+ 
             //res.redirect("/api/users/profile");
         } catch (error) {
             console.error(error);
             res.status(500).send("Error interno del servidor");
-        }
+        } */
     }
 
     async login(req, res) {
