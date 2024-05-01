@@ -4,8 +4,8 @@ const UserModel = require("../models/user.model.js");
 
 const CartModel = require("../models/cart.model.js");
 
-//const UserRepository = require("../repositories/user.repository.js");
-//const userRepository = new UserRepository(); 
+/* const UserRepository = require("../repositories/user.repository.js");
+const userRepository = new UserRepository();  */
 
 const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashbcrypt.js");

@@ -5,7 +5,9 @@
 const express = require("express");
 
 const app = express();
-const productsRouter = require("./routes/products.Router.js");
+
+const productsRouter = require("./routes/product.router.js");
+
 const cartsRouter = require ("./routes/carts.router.js");
 const userRouter = require("./routes/user.router.js");
 
@@ -33,9 +35,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("./src/public"));
 
 //routing
-app.use("/api/products", productsRouter);
+
+
+app.use("/api/products/", productsRouter )
+
 app.use("/api/carts", cartsRouter);
-app.use("api/users", userRouter);
+app.use("/api/users", userRouter);
 app.use("/", viewsRouter);
 
 //guardar una referencia de express 

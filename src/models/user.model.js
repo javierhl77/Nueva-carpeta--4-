@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
     },
     cart: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cart'
+        ref: 'cart'
     },
     role: {
         type: String,
@@ -40,6 +40,6 @@ const userSchema = mongoose.Schema({
     }
 });
 
-const UserModel = mongoose.model("user", userSchema);
+const UserModel = mongoose.model("users", userSchema);
 
 module.exports = UserModel;
