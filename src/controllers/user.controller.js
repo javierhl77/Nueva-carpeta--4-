@@ -14,38 +14,13 @@ const UserDTO = require("../dto/user.dto.js");
 class UserController {
     
     async register(req, res) {
-
-        const {first_name,last_name,email,password,age} = req.body;
+       const {first_name,last_name,email,password,age} = req.body;
 
         try {
-            const nuevoCarrito = new CartModel();
-            await nuevoCarrito.save();
 
-            const nuevoUsuario = await UserModel.create({
-                first_name,
-                last_name,
-                email,
-                password: createHash(password),
-                age,
-                cart: nuevoCarrito._id, 
-                
-            });
-            //await nuevoUsuario.save();
-            res.json(nuevoUsuario);
-              
-            res.send("usuario registrado correctamente");
-        } catch (error) {
-            
-        }
-        
-        /* const {first_name,last_name,email,password,age } = req.body;
-        try {
-            const existeUsuario = await UserModel.findOne({email:email});
-            if (existeUsuario) {
-                return res.status(400).send("El usuario ya existe");
-            }
+            const user = await UserModel.findOne({email});
+            if(user) return res.status(400).send("usuario ya existe");
 
-            //Creo un nuevo carrito: 
             const nuevoCarrito = new CartModel();
             await nuevoCarrito.save();
 
@@ -55,17 +30,20 @@ class UserController {
                 email,
                 password: createHash(password),
                 age,
-                cart: nuevoCarrito._id, 
-                
-            });
+                cart : nuevoCarrito._id
+              })
             await nuevoUsuario.save();
-            res.json(nuevoUsuario);
+            //res.json(nuevoUsuario);
               
             res.send("usuario registrado correctamente");
-
+        } 
+        catch (error) {
+            res.status(500).send("error")
+        } 
+        
              //const nuevoUsuario = await userRepository.RegisterUser({first_name, last_name, email, password, age})
-             console.log("usuario creqdo")
-            const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
+            
+        const token = jwt.sign({ user: nuevoUsuario }, "coderhouse", {
                 expiresIn: "1h"
             }); 
 
@@ -75,25 +53,21 @@ class UserController {
             });
  
             //res.redirect("/api/users/profile");
-        } catch (error) {
-            console.error(error);
-            res.status(500).send("Error interno del servidor");
-        } */
+    
+
+        
     }
 
     async login(req, res) {
         const { email, password } = req.body;
         try {
-           /*  const usuarioEncontrado = await UserModel.findOne({ email });
+            const usuarioEncontrado = await UserModel.findOne({ email });
 
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
-            } */
+            } 
 
-            const usuarioEncontrado = userRepository.findByEmail({email});
-            if (!usuarioEncontrado) {
-                return res.status(401).send("Usuario no válido");
-            }
+       
 
             const esValido = isValidPassword(password, usuarioEncontrado);
             if (!esValido) {

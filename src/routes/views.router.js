@@ -6,8 +6,10 @@ const CartController = require("../controllers/cart.controller.js");
 const cartController = new CartController();
 const cartModel = require("../models/cart.model.js");
 
+const ProductController = require("../controllers/product.controller.js");
+const productController = new ProductController();
 
-const ProductManager = require("../controllers/product-manager-db.js");
+/* const ProductManager = require("../controllers/product-manager-db.js");
 
 const productManager = new ProductManager();
 
@@ -44,6 +46,10 @@ router.get("/products", async (req, res) => {
       });
    }
 });
+ */
+
+//router.get("/products", )
+
 
 router.get("/carts/:cid", async (req, res) => {
    const cartId = req.params.cid;
