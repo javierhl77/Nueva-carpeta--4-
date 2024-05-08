@@ -139,7 +139,7 @@ class CartController {
         const ticket = new TicketModel({
             code: generateUniqueCode(),
             purchase_datetime: new Date(),
-            amount: calcularTotal(cart.products),
+            amount: CalcTotal(cart.products),
             purchaser: userWithCart._id
         });
         await ticket.save();
