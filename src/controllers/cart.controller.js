@@ -1,12 +1,12 @@
 const CartRepository = require("../repositories/cart.repository.js");
 const cartRepository = new CartRepository();
 
-const Ticket = require("../models/ticket.model.js");
+const TicketModel = require("../models/ticket.model.js");
 const ProductRepository = require("../repositories/product.repository.js");
 const productRepository = new ProductRepository();
 const UserModel = require("../models/user.model.js");
 
-const { generatedUniqueCode, CalcTotal} = require("../utils/cartutils.js");
+const { generatedUniqueCode, CalcTotal } = require("../utils/cartutils.js");
 
 class CartController {
   async nuevoCarrito(req, res) {
@@ -137,7 +137,7 @@ class CartController {
 
         // Crear un ticket con los datos de la compra
         const ticket = new TicketModel({
-            code: generateUniqueCode(),
+            code: generatedUniqueCode(),
             purchase_datetime: new Date(),
             amount: CalcTotal(cart.products),
             purchaser: userWithCart._id

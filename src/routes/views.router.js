@@ -9,15 +9,18 @@ const cartModel = require("../models/cart.model.js");
 const ProductController = require("../controllers/product.controller.js");
 const productController = new ProductController();
 
-/* const ProductManager = require("../controllers/product-manager-db.js");
+const productRepository = require("../repositories/product.repository.js");
+const ProductRepository = new productRepository();
 
-const productManager = new ProductManager();
+/*  const ProductManager = require("../controllers/product-manager-db.js");
+
+const productManager = new ProductManager(); */
 
 
 router.get("/products", async (req, res) => {
    try {
-      const { page = 1, limit = 2 } = req.query;
-      const productos = await productManager.getProducts({
+      const { limit = 2 ,page = 1 } = req.query;
+      const productos = await ProductRepository.getAll({
          page: parseInt(page),
          limit: parseInt(limit)
       });
@@ -46,8 +49,7 @@ router.get("/products", async (req, res) => {
       });
    }
 });
- */
-
+ 
 //router.get("/products", )
 
 
