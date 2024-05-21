@@ -27,7 +27,7 @@ router.delete("/:cid", cartController.vaciarCarrito);
 // mostrar el carrito correspondiente a su id
 router.get("/:cid", cartController.obtenerProductoDeCarrito);
 
-router.post('/purchase/:cid', cartController.finalizarCompra);
+router.post("/:cid/purchase", cartController.finalizarCompra);
 
 
 module.exports = router;

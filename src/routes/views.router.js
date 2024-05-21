@@ -50,7 +50,7 @@ router.get("/products", async (req, res) => {
    }
 });
  
-//router.get("/products", )
+
 
 
 router.get("/carts/:cid", async (req, res) => {

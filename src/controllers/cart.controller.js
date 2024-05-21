@@ -6,7 +6,7 @@ const ProductRepository = require("../repositories/product.repository.js");
 const productRepository = new ProductRepository();
 const UserModel = require("../models/user.model.js");
 
-const { generatedUniqueCode, CalcTotal } = require("../utils/cartutils.js");
+const { generatedUniqueCode, calcTotal } = require("../utils/cartutils.js");
 
 class CartController {
   async nuevoCarrito(req, res) {
@@ -139,7 +139,7 @@ class CartController {
         const ticket = new TicketModel({
             code: generatedUniqueCode(),
             purchase_datetime: new Date(),
-            amount: CalcTotal(cart.products),
+            amount: calcTotal(cart.products),
             purchaser: userWithCart._id
         });
         await ticket.save();
